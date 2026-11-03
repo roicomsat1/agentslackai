@@ -1,0 +1,15 @@
+@import "tailwindcss";
+:root { color-scheme: dark; }
+body { background: #07060f; color: #e7e5f4; }
+.grad-text { background: linear-gradient(90deg,#818cf8,#a78bfa 45%,#fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.grad-bg { background: linear-gradient(135deg,#6366f1,#8b5cf6 55%,#f59e0b); }
+.card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 1rem; }
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border-radius:.75rem; padding:.7rem 1.2rem; font-weight:600; transition:.15s; }
+.btn-primary { background: linear-gradient(135deg,#6366f1,#8b5cf6); color:white; box-shadow: 0 8px 30px -8px rgba(139,92,246,.6); }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost { border:1px solid rgba(255,255,255,.15); color:#e7e5f4; }
+.btn-ghost:hover { background: rgba(255,255,255,.06); }
+.input { width:100%; background: rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:.6rem; padding:.65rem .8rem; color:white; }
+.input:focus { outline: 2px solid #8b5cf6; }
+.prose-out h1,.prose-out h2,.prose-out h3 { font-weight:700; margin-top:1.1em; color:white; }
+.prose-out h2 { font-size:1.2rem } .prose-out h3 { font-size:1.05rem }
