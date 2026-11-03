@@ -10,7 +10,7 @@ Owned-stack rebuild of agentslackai.com (it replaces the Abacus.AI-hosted versio
 - Auth: sign-up gives a new account 50 free credits. Sessions use JWTs, and `/dashboard/*` is protected.
 - 5 agents: Viral Content (10 credits), Branding (20), UGC Ad Scripts (15), Image Creative (12), Video Production (15).
   - Credits are reserved atomically and refunded if a run fails. Every run is saved to History, and you can copy or download it as .md.
-  - Image Creative returns production-ready prompts. Set `ENABLE_IMAGE_GEN=true` to also generate an image with `gpt-image-1`.
+  - Image Creative returns production-ready prompts. Set `ENABLE_IMAGE_GEN=true` to also generate images with `gpt-image-1.5`.
 - Stripe: there are subscription checkout plans for Starter £9 (500 credits), Pro £19 (2,000) and Growth £49 (10,000). The `invoice.paid` webhook adds the monthly credits.
 - `/api/health` reports which services are configured.
 
@@ -46,3 +46,8 @@ vercel --prod                    # the build runs `prisma db push` automatically
 3. Update `AUTH_URL` and `NEXT_PUBLIC_SITE_URL` to `https://agentslackai.com`, update the Google OAuth and Stripe webhook URLs to match, then redeploy.
 4. Vercel automatically redirects HTTP to HTTPS.
 5. Switch off the Abacus.AI deployment.
+
+## UGC Creator agent: visuals and AI video
+- **Scripts:** you get 3 native-voice creator scripts (Problem/Agitate/Solve, testimonial, demo/unboxing). Each has hooks, a word-for-word timestamped script, captions, b-roll, CTA, hashtags and posting notes for TikTok, Reels and Shorts. Output is capped at 3,500 tokens.
+- **Images:** set `ENABLE_IMAGE_GEN=true` (with `OPENAI_API_KEY`). The `ugc-scripts` and `image-creative` agents each make 2 vertical 1024x1536 visuals using `gpt-image-1.5` (you can change the model with `OPENAI_IMAGE_MODEL`).
+- **Video (HeyGen, optional):** set `HEYGEN_API_KEY`, `HEYGEN_AVATAR_ID` and `HEYGEN_VOICE_ID`. Set `HEYGEN_AVATAR_TYPE=talking_photo` for photo or Avatar IV avatars. After writing the scripts, the agent sends the main voiceover to HeyGen `POST /v2/video/generate` as a 720x1280 video. The dashboard then polls `/api/ugc-status?video_id=…`, which calls HeyGen `GET /v1/video_status.get`, and plays the finished video. If any HeyGen variable is missing, the agent skips the video and tells you why.
